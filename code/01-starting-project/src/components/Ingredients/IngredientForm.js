@@ -6,7 +6,8 @@ import './IngredientForm.css';
 const IngredientForm = React.memo(props => {
 
   // React manages state independent of component so it survives rerendering
-  const [ inputState, setInputState ] = useState({title: '', amount: ''}); // input field still returns string even if number
+  const [ titleInput, setTitleInput ] = useState("");
+  const [ amountInput, setAmountInput ] = useState(""); // input field still returns string even if number
 
   const submitHandler = event => {
     event.preventDefault();
@@ -22,28 +23,20 @@ const IngredientForm = React.memo(props => {
             <input 
               type="text" 
               id="title" 
-              value={inputState.title} 
+              value={titleInput} 
               onChange={event => {
-                const newTitle = event.target.value;
-                setInputState(prevInputState => ({ 
-                  title: newTitle, 
-                  amount: prevInputState.amount 
-                })
-              )}} />
+                setTitleInput(event.target.value);
+              }} />
           </div>
           <div className="form-control">
             <label htmlFor="amount">Amount</label>
             <input 
               type="number" 
               id="amount" 
-              value={inputState.amount} 
+              value={amountInput} 
               onChange={event => {
-                const newAmount = event.target.value;
-                setInputState(prevInputState => ({ 
-                  title: prevInputState.title, 
-                  amount: newAmount 
-                })
-              )}} />
+                setAmountInput(event.target.value);
+              }} />
           </div>
           <div className="ingredient-form__actions">
             <button type="submit">Add Ingredient</button>
